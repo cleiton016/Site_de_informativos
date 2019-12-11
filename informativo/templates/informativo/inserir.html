@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block estilo%}
+    <link rel="stylesheet" href="{% static 'bootstrap\css\bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/box.css' %}">
+{% endblock estilo %}
+{% block inicio %}
+    <!--Campo para Upload-->
+    <div style="-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;">
+    <div class="caixa">
+        <form method='POST' class='box' enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class='input-group mb-2'>{{form.nome}}</div>
+                <div class='input-group mb-2'>{{form.info}}</div>
+                <div class="input-group mb-2"><div class="custom-file">{{form.arquivo}} </div> </div>
+                <button class="btn btn-primary my-2 my-sm-0" type="Submit">Concluir</button>
+            </div>
+
+        </form>
+    </div>
+{% endblock inicio %}

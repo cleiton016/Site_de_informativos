@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block pesquisa%}
+  
+  <form class="form-inline my-2 my-lg-0" method="POST">
+  {% csrf_token %}
+  {{form.busca}}
+  <button class="btn btn-primary my-2 my-sm-0" type="Submit">Pesquisar</button>
+  </form>
+{% endblock pesquisa%}
+
+{% block inicio %}
+<main role="main">
+<div class="card-body">
+  {% if events|length > 0 %}
+    <table class="table table-striped table-responsive-md">
+      <thead class="thead-dark">
+        <tr>
+         <th class='text-left' scope="col-md-6 ">Nome{{ total|pluralize }}</th>
+          <th class='text-left' scope="col-md-6 ">Descrição{{ total|pluralize }}</th>
+          <th scope="col-md-3" style='width:200px'>Data</th>
+          <th scope="col-md-3">Anexo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in events %}
+          <tr>
+            <td class='text-left'>{{i.nome}}</td>
+            <td class='text-left'>
+            {% autoescape on %}{{ i.info | linebreaksbr }}{% endautoescape %}</td>
+            <th style="vertical-align: middle;" scope="row">{{i.data|date:"d/m/y"}} às {{i.data|date:"H:i"}}</th>
+            <td style="vertical-align: middle;">{{i.arquivo}}<a target='blank'href="{% url 'visualizar' i.pk %}"><img title='Visualizar' src="static/img/pdf.svg"></a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% with events as paginated %}
+      {% include "layouts/pagination.html" %}
+    {% endwith %}
+    <hr/>
+    <p>Você tem {{ total }} informativo{{ total|pluralize }} registrado{{ total|pluralize }}.</p>
+  {% else %}
+    <div class="alert alert-secondary text-center">
+      Nem um informativo cadastrado.
+    </div>
+  {% endif %}
+    </div>
+</main>
+{% endblock inicio %}
