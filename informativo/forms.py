@@ -17,3 +17,8 @@ class InforForm(forms.ModelForm):
     class Meta:
         model = Informativos
         fields = ('nome', 'info','arquivo', )
+        widgets = {
+            'nome': forms.TextInput(attrs={'class':'form-control mr-sm-2','placeholder':'Nome do informativo','style':'length:200px'}),
+      
+            'info': forms.Textarea(attrs={'class':'form-control mr-sm-2','placeholder':'Descrição'}),
+        } 

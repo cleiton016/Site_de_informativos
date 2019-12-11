@@ -28,7 +28,7 @@
             <td class='text-left'>
             {% autoescape on %}{{ i.info | linebreaksbr }}{% endautoescape %}</td>
             <th style="vertical-align: middle;" scope="row">{{i.data|date:"d/m/y"}} às {{i.data|date:"H:i"}}</th>
-            <td style="vertical-align: middle;">{{i.arquivo}}<a target='blank'href="{% url 'visualizar' i.pk %}"><img title='Visualizar' src="static/img/pdf.svg"></a></td>
+            <td style="vertical-align: middle;"><a target='blank'href="{% url 'visualizar' i.pk %}"><img title='Visualizar' src="static/img/pdf.svg"></a></td>
           </tr>
         {% endfor %}
       </tbody>
